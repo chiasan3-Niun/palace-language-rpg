@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="太醫院字典檢索徽章">
+  <circle cx="256" cy="256" r="224" fill="#29424a" stroke="#d9b66a" stroke-width="18"/>
+  <circle cx="256" cy="256" r="170" fill="#18252b" stroke="#9b6f3b" stroke-width="8"/>
+  <path d="M154 163c38-21 70-20 102 2v188c-32-22-64-23-102-2z" fill="#e8ddbd" stroke="#d4a45d" stroke-width="9" stroke-linejoin="round"/>
+  <path d="M358 163c-38-21-70-20-102 2v188c32-22 64-23 102-2z" fill="#d8c99e" stroke="#d4a45d" stroke-width="9" stroke-linejoin="round"/>
+  <path d="M256 165v188" fill="none" stroke="#9b6f3b" stroke-width="7"/>
+  <path d="M182 210h49m-49 30h49m-49 30h49M281 210h49m-49 30h49m-49 30h49" fill="none" stroke="#71807a" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="256" cy="382" r="32" fill="#29424a" stroke="#d9b66a" stroke-width="7"/>
+  <path d="m244 382 9 9 18-20" fill="none" stroke="#e8ddbd" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

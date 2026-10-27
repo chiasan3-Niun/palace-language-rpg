@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="殿試決戰徽章">
+  <circle cx="256" cy="256" r="224" fill="#6a2520" stroke="#f0d080" stroke-width="18"/>
+  <circle cx="256" cy="256" r="170" fill="#281b1b" stroke="#a9783d" stroke-width="8"/>
+  <path d="M175 188h162v137H175z" fill="#d3b86e" stroke="#f1dda1" stroke-width="9"/>
+  <path d="M199 211h114v91H199z" fill="#f0e4c5" stroke="#69462e" stroke-width="7"/>
+  <path d="M218 235h76m-76 23h76m-76 23h54" stroke="#8e3025" stroke-width="8" stroke-linecap="round"/>
+  <path d="M256 125l15 34 37-9-18 34 29 23-38 2-8 37-17-33-36 14 20-32-27-26 38 2z" fill="#d8bd72" stroke="#77562e" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M211 386h90" fill="none" stroke="#d0a35e" stroke-width="9" stroke-linecap="round"/>
+</svg>

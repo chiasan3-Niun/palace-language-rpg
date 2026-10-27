@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import { getRank, createProgression, completeLevel } from '../src/progression.js';
+assert.equal(getRank(0).name, '官女子');
+assert.equal(getRank(8).name, '聖母皇太后');
+let p = createProgression();
+p = completeLevel(p, 0, 'ITEM_01_SCROLL');
+assert.deepEqual(p.completed, [0]);
+assert.deepEqual(p.items, ['ITEM_01_SCROLL']);
+assert.equal(p.suspicion, 0);
+p = { ...p, suspicion: 79 };
+p = completeLevel(p, 1, 'ITEM_02_BOX', false);
+assert.equal(p.suspicion, 84);
+console.log('progression tests passed');

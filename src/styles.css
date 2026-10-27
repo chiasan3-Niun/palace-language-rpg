@@ -1,0 +1,61 @@
+:root {
+  color-scheme: dark;
+  font-family: "Noto Serif TC", "PMingLiU", serif;
+  background: #17100e;
+  color: #f8ecd4;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; background: #17100e; }
+button { font: inherit; cursor: pointer; }
+
+.game-shell {
+  min-height: 100vh;
+  background: linear-gradient(180deg, rgba(21, 10, 7, .08), rgba(21, 10, 7, .88)), url('../public/images/backgrounds/BG_01_SHENWUMEN.png') center / cover fixed;
+  padding: 24px;
+}
+.topbar, .dialogue-card, .question-card, .result-card, .lesson-card {
+  width: min(980px, 100%);
+  margin: 0 auto 16px;
+  background: rgba(39, 20, 16, .91);
+  border: 1px solid rgba(214, 170, 91, .58);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, .35);
+}
+.topbar { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding: 16px 20px; }
+.eyebrow { color: #d6aa5b; letter-spacing: .14em; font-size: .8rem; }
+h1, h2, h3, p { margin-top: 0; }
+h1 { margin-bottom: 4px; font-size: clamp(1.35rem, 3vw, 2rem); }
+.objective { margin: 0; color: #e8d4ae; }
+.status-panel { min-width: 190px; }
+.level-nav { width: min(980px, 100%); margin: 0 auto 12px; display: flex; gap: 5px; flex-wrap: wrap; }
+.level-dot { border: 1px solid rgba(214,170,91,.5); background: rgba(39,20,16,.85); color: #e8d4ae; padding: 6px 9px; border-radius: 2px; }
+.level-dot.active { background: #9a5c3f; color: #fff5dc; border-color: #e2b968; }
+.clue-chip { margin: 0 0 16px 18px; padding: 8px 12px; background: rgba(39,20,16,.88); color: #d6aa5b; border: 1px solid rgba(214,170,91,.5); align-self: end; }
+.status-row { display: flex; justify-content: space-between; font-size: .85rem; margin-top: 4px; }
+.bar { height: 8px; margin: 4px 0 6px; background: #4d322a; border-radius: 99px; overflow: hidden; }
+.bar-fill { display: block; height: 100%; transition: width .25s ease; }
+.composure { background: #ba4b4b; }
+.talent { background: #5ca18e; }
+.scene { width: min(980px, 100%); margin: 0 auto 16px; position: relative; min-height: 180px; display: flex; align-items: end; }
+.character { max-height: 310px; max-width: 44%; object-fit: contain; filter: drop-shadow(0 10px 12px rgba(0,0,0,.5)); }
+.dialogue-card, .question-card, .result-card, .lesson-card { padding: 22px; }
+.speaker { color: #e2b968; font-weight: 700; margin-bottom: 10px; }
+.choice-list, .answer-list { display: grid; gap: 10px; margin-top: 16px; }
+.choice-button, .answer-button, .tool-button, .restart-button { border: 1px solid #b88b47; color: #fff4dd; background: rgba(102, 43, 34, .8); padding: 11px 14px; text-align: left; border-radius: 3px; }
+.choice-button:hover, .answer-button:hover, .tool-button:hover, .restart-button:hover { background: #8e4b37; }
+.answer-button.selected { outline: 2px solid #e2b968; background: #713e32; }
+.tools { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.tool-button { font-size: .9rem; }
+.tool-button:disabled { opacity: .45; cursor: not-allowed; }
+.feedback { margin-top: 14px; padding: 12px; border-left: 4px solid #d6aa5b; background: rgba(255,255,255,.06); }
+.feedback.good { border-left-color: #72b49c; }
+.feedback.bad { border-left-color: #d87365; }
+.source-status { color: #d6aa5b; font-size: .85rem; }
+.hidden { display: none; }
+@media (max-width: 680px) {
+  .game-shell { padding: 12px; }
+  .topbar { display: block; }
+  .status-panel { margin-top: 14px; }
+  .scene { min-height: 140px; }
+  .character { max-height: 230px; }
+}

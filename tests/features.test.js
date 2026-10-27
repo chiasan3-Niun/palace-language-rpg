@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import { createFeatures, updateFeatures, useAmulet, EVENTS } from '../src/features.js';
+let f = updateFeatures(createFeatures(), 1, 5);
+assert.ok(f.achievements.includes('six-books'));
+assert.ok(f.allies.includes('太醫盟'));
+f = useAmulet(f);
+assert.equal(f.amulet, 0);
+assert.equal(useAmulet(f).amulet, 0);
+assert.equal(EVENTS.length, 3);
+console.log('feature system tests passed');

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="歲時日晷徽章">
+  <circle cx="256" cy="256" r="224" fill="#554331" stroke="#e5cc86" stroke-width="18"/>
+  <circle cx="256" cy="256" r="170" fill="#24241f" stroke="#aa8750" stroke-width="8"/>
+  <circle cx="256" cy="256" r="112" fill="#d9c69b" stroke="#c69e54" stroke-width="10"/>
+  <path d="M256 170v172M170 256h172M195 195l122 122m0-122L195 317" stroke="#715a39" stroke-width="9" stroke-linecap="round"/>
+  <path d="M256 208l-26 64 26-12 26 12-26-64z" fill="#8c3024" stroke="#3c3023" stroke-width="7" stroke-linejoin="round"/>
+  <circle cx="256" cy="256" r="15" fill="#e9d9ad" stroke="#715a39" stroke-width="6"/>
+  <path d="M256 128v20m128 108h-20M256 384v-20M128 256h20M165 165l15 15m152 152 15 15m0-182-15 15m-152 152-15 15" stroke="#eadcad" stroke-width="9" stroke-linecap="round"/>
+  <path d="M211 386h90" fill="none" stroke="#d0a35e" stroke-width="9" stroke-linecap="round"/>
+</svg>

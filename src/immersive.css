@@ -1,0 +1,45 @@
+.immersive-shell { min-height: 100vh; padding: 28px; background: #140b09 center/cover fixed; animation: scene-in .7s ease both; }
+.map-screen { min-height: calc(100vh - 56px); padding: 28px; border: 1px solid #b88b47; background: linear-gradient(135deg, rgba(35,17,12,.72), rgba(35,17,12,.9)), url('../public/images/backgrounds/BG_01_SHENWUMEN.png') center/cover; }
+.map-title { max-width: 760px; margin: 0 auto 28px; text-align: center; }
+.map-title h1 { font-size: clamp(2rem, 5vw, 4rem); letter-spacing: .18em; }
+.map-grid { width: min(1000px, 100%); margin: auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.map-node { min-height: 112px; padding: 16px 10px; color: #f8ecd4; border: 1px solid rgba(214,170,91,.65); background: rgba(55,27,21,.9); text-align: center; transition: transform .25s, background .25s; }
+.map-node:not(:disabled):hover { transform: translateY(-5px); background: #8b4a36; }
+.map-node:disabled { color: #8b7464; border-color: #59463e; background: rgba(25,17,15,.85); cursor: not-allowed; }
+.map-node small { display: block; margin-top: 8px; color: #d6aa5b; }
+.cutscene { min-height: calc(100vh - 56px); display: grid; place-items: center; background: #160c0a; }
+.cutscene-card { width: min(920px, 100%); padding: 34px; text-align: center; background: linear-gradient(180deg, rgba(52,25,19,.75), rgba(23,12,10,.95)); border: 1px solid #b88b47; animation: scene-in 1s ease both; }
+.cutscene-card img { width: min(620px, 100%); max-height: 46vh; object-fit: contain; margin: 12px auto; animation: float-in 1s ease both; }
+.cutscene-card p { color: #f1dcc0; font-size: 1.2rem; line-height: 1.9; }
+.immersive-shell .topbar, .immersive-shell .dialogue-card, .immersive-shell .question-card, .immersive-shell .result-card, .immersive-shell .lesson-card { animation: scene-in .5s ease both; }
+.puzzle-card { width: min(980px, 100%); margin: 0 auto 16px; padding: 26px; background: rgba(39,20,16,.94); border: 1px solid #d6aa5b; }
+.clue-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 18px 0; }
+.clue-part { min-height: 130px; padding: 10px; color: #f8ecd4; background: rgba(92,44,31,.8); border: 1px solid #9d7443; }
+.clue-part img { width: 100%; height: 80px; object-fit: contain; }
+.clue-part.selected { outline: 3px solid #e2b968; background: #8e4b37; }
+@keyframes scene-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes float-in { from { opacity: 0; transform: translateX(36px) scale(.96); } to { opacity: 1; transform: none; } }
+@media (max-width: 700px) { .map-grid { grid-template-columns: repeat(2, 1fr); } .immersive-shell, .map-screen { padding: 14px; } .clue-board { grid-template-columns: 1fr; } }
+.audio-controls { display: flex; align-items: center; justify-content: flex-end; gap: 10px; min-height: 36px; margin-bottom: 10px; }
+.audio-toggle { padding: 8px 14px; color: #f8ecd4; border: 1px solid #b88b47; background: rgba(55,27,21,.92); }
+.audio-toggle:hover { background: #8b4a36; }
+.audio-status { color: #f1b8a6; font-size: .9rem; }
+.knowledge-card { margin: 18px 0; padding: 16px 20px; border: 1px solid #b88b47; background: rgba(93, 48, 34, .45); text-align: left; }
+.knowledge-card h3 { margin: 0 0 8px; color: #f8d98d; }
+.knowledge-card ul { margin: 8px 0 0; padding-left: 20px; }
+.bar-fill.suspicion { background: #9b3d3d; }
+.map-tools { display: flex; justify-content: center; gap: 10px; margin: 16px 0; }
+.map-tools button, .feature-panel button { padding: 8px 14px; color: #f8ecd4; border: 1px solid #b88b47; background: rgba(55,27,21,.92); }
+.feature-panel { max-width: 720px; margin: 20px auto 0; padding: 18px; border: 1px solid #b88b47; background: rgba(35,15,12,.92); text-align: left; }
+.event-card { margin: 14px 0; padding: 12px; border: 1px solid #8d5d35; background: rgba(92, 48, 30, .5); }
+.puzzle-art { display: block; width: min(160px, 45vw); max-height: 120px; object-fit: contain; margin: 8px auto 14px; }
+.puzzle-help { color: #d9b879; font-size: .9rem; }
+.clue-part[draggable="true"] { cursor: grab; }
+.clue-part.dragging { opacity: .45; }
+.final-ending { color: #f8d98d; font-size: 1.1rem; }
+.dial-control { display: grid; gap: 12px; max-width: 560px; margin: 24px auto; color: #f8d98d; }
+.dial-control input { accent-color: #b88b47; width: 100%; }
+.dial-control output { padding: 12px; border: 1px solid #8d5d35; background: rgba(92,48,30,.5); text-align: center; }
+.drop-target { max-width: 420px; margin: 18px auto; padding: 28px 16px; border: 2px dashed #b88b47; color: #f8d98d; text-align: center; }
+.couplet-tiles { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
+.couplet-tiles .clue-part { cursor: grab; min-width: 120px; }

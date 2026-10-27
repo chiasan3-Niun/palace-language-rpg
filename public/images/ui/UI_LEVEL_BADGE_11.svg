@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="經史子集徽章">
+  <circle cx="256" cy="256" r="224" fill="#253d37" stroke="#dec078" stroke-width="18"/>
+  <circle cx="256" cy="256" r="170" fill="#182622" stroke="#98704a" stroke-width="8"/>
+  <path d="M165 178h182v174H165z" fill="#9b794b" stroke="#dfc785" stroke-width="10"/>
+  <path d="M185 195h64v140h-64zm78 0h64v140h-64z" fill="#e6d9b5" stroke="#604a32" stroke-width="7"/>
+  <path d="M205 220h24m-24 24h24m-24 24h24m-24 24h24m34-72h24m-24 24h24m-24 24h24m-24 24h24" stroke="#6b5439" stroke-width="7" stroke-linecap="round"/>
+  <path d="M256 144v22m0 180v22M144 256h22m180 0h22" stroke="#ead9a8" stroke-width="9" stroke-linecap="round"/>
+  <path d="M211 386h90" fill="none" stroke="#d0a35e" stroke-width="9" stroke-linecap="round"/>
+</svg>
