@@ -28,7 +28,7 @@ export function applyAnswer(state, isCorrect) {
   }
 
   const composure = Math.max(0, state.composure - 15);
-  return { ...state, composure, phase: composure === 0 ? 'failure' : 'retry' };
+  return { ...state, composure, suspicion: Math.min(100, (state.suspicion || 0) + 5), phase: composure === 0 ? 'failure' : 'retry' };
 }
 
 export function useHint(state, hintType) {
