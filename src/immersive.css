@@ -41,6 +41,7 @@
 .clue-part[draggable="true"] { cursor: grab; touch-action: none; user-select: none; }
 .clue-part.dragging { opacity: .45; }
 .final-ending { color: #f8d98d; font-size: 1.1rem; }
+.copyright-footer { width: 100%; padding: 18px 12px 24px; color: #d9b879; font-size: .85rem; letter-spacing: .08em; text-align: center; opacity: .9; }
 .dial-control { display: grid; gap: 12px; max-width: 560px; margin: 24px auto; color: #f8d98d; }
 .dial-control input { accent-color: #b88b47; width: 100%; }
 .dial-control output { padding: 12px; border: 1px solid #8d5d35; background: rgba(92,48,30,.5); text-align: center; }

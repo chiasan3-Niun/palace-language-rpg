@@ -59,6 +59,10 @@ function audioControls() {
   return `<div class="audio-controls"><button class="audio-toggle" type="button" data-audio-toggle aria-pressed="${audio.isEnabled()}">音效：${audio.isEnabled() ? '開啟' : '關閉'}</button>${audioError ? `<span class="audio-status" role="status">${audioError}</span>` : ''}</div>`;
 }
 
+function copyrightFooter() {
+  return '<footer class="copyright-footer">Niun的族語教學多媒體應用</footer>';
+}
+
 function startTimer() { clearInterval(timerId); timerSeconds = timedLevels[level().id] || 0; if (!timerSeconds) return; timerId = setInterval(() => { timerSeconds -= 1; if (timerSeconds <= 0) { clearInterval(timerId); phase = 'failure'; render(); } else render(); }, 1000); }
 function stopTimer() { clearInterval(timerId); timerId = null; }
 
@@ -133,8 +137,8 @@ function render() {
   runStats = { composure: state.composure, talent: state.talent, suspicion: Math.max(state.suspicion || 0, progression.suspicion || 0) };
   localStorage.setItem('palace-run-stats', JSON.stringify(runStats));
   progression = { ...progression, suspicion: Math.max(progression.suspicion, state.suspicion || 0) };
-  if (phase === 'map') { app.innerHTML = mapView(); }
-  else { state = { ...state, suspicion: Math.max(progression.suspicion, state.suspicion || 0) }; const rank = getRank(progression.completed.length); const character = levelIndex === 0 ? (rank.index >= 2 ? '../public/images/characters/CH_PROTAGONIST_01_relieved.png' : '../public/images/characters/CH_PROTAGONIST_01_neutral.png') : level().character; app.innerHTML = `${audioControls()}<header class="topbar"><div><div class="eyebrow">第 ${levelIndex + 1}／12 關｜${level().subtitle}｜品階：${rank.name}</div><h1>${level().title}</h1><p class="objective">任務：${level().objective}</p></div>${renderStatus(state)}</header><section class="scene" aria-label="${level().title}場景"><img class="character" src="${character}" alt="${level().title}角色"><div class="clue-chip">劇情證物：${clueLabels[level().item]}｜背包 ${progression.items.length} 件</div></section>${phase === 'cutscene' ? cutsceneView() : ''}${phase === 'puzzle' ? puzzleView() : ''}${dialogueView()}${questionView()}${finalBattleView()}${resultView()}`; }
+  if (phase === 'map') { app.innerHTML = `${mapView()}${copyrightFooter()}`; }
+  else { state = { ...state, suspicion: Math.max(progression.suspicion, state.suspicion || 0) }; const rank = getRank(progression.completed.length); const character = levelIndex === 0 ? (rank.index >= 2 ? '../public/images/characters/CH_PROTAGONIST_01_relieved.png' : '../public/images/characters/CH_PROTAGONIST_01_neutral.png') : level().character; app.innerHTML = `${audioControls()}<header class="topbar"><div><div class="eyebrow">第 ${levelIndex + 1}／12 關｜${level().subtitle}｜品階：${rank.name}</div><h1>${level().title}</h1><p class="objective">任務：${level().objective}</p></div>${renderStatus(state)}</header><section class="scene" aria-label="${level().title}場景"><img class="character" src="${character}" alt="${level().title}角色"><div class="clue-chip">劇情證物：${clueLabels[level().item]}｜背包 ${progression.items.length} 件</div></section>${phase === 'cutscene' ? cutsceneView() : ''}${phase === 'puzzle' ? puzzleView() : ''}${dialogueView()}${questionView()}${finalBattleView()}${resultView()}${copyrightFooter()}`; }
   bind();
 }
 
