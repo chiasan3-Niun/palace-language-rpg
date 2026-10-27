@@ -1,4 +1,4 @@
-import { createInitialState, applyDialogueChoice, applyAnswer, useHint } from './game.js';
+import { createInitialState, applyDialogueChoice, applyAnswer, useHint, rewardPuzzle } from './game.js';
 import { levels } from './data/levels-all.js';
 import { questionBank } from './data/question-bank.js';
 import { puzzles } from './data/puzzles.js';
@@ -140,7 +140,7 @@ function bind() {
     b.addEventListener('dragover', (event) => event.preventDefault());
     b.addEventListener('drop', (event) => { event.preventDefault(); const target = Number(b.dataset.puzzleIndex); if (dragStartIndex === null || dragStartIndex === target) return; const order = clueOrder.length ? clueOrder : puzzles[level().id].parts; clueOrder = reorderParts(order, dragStartIndex, target); render(); });
   });
-  app.querySelector('[data-puzzle-next]')?.addEventListener('click', () => { playSound('puzzle-complete'); phase = 'dialogue'; startTimer(); render(); });
+  app.querySelector('[data-puzzle-next]')?.addEventListener('click', () => { playSound('puzzle-complete'); state = rewardPuzzle(state); phase = 'dialogue'; startTimer(); render(); });
   app.querySelectorAll('[data-choice]').forEach((b) => b.addEventListener('click', () => { playSound('dialogue-choice'); state = applyDialogueChoice(state, b.dataset.choice); phase = levelIndex === 11 ? 'final-battle' : 'question'; render(); }));
   app.querySelectorAll('[data-battle-answer]').forEach((b) => b.addEventListener('click', () => { const stage = finalBattle[battleState.stage]; if (stage.id === 'couplet' && coupletTiles.join('|') !== '一曲離歌|千秋青史|付微軀') { feedback = '先把對聯字塊排列成完整下聯。'; render(); return; } const result = applyBattleAnswer(battleState, Number(b.dataset.battleAnswer)); if (result.failed) { progression = completeLevel(progression, levelIndex, level().item, false); localStorage.setItem('palace-progression', JSON.stringify(progression)); playSound('answer-wrong'); phase = 'failure'; } else { playSound('answer-correct'); battleState = result; phase = result.won ? 'success' : 'final-battle'; if (result.won) { progression = completeLevel(progression, levelIndex, level().item); features = updateFeatures({ ...features, items: progression.items }, progression.completed.length, levelIndex); localStorage.setItem('palace-progression', JSON.stringify(progression)); localStorage.setItem('palace-features', JSON.stringify(features)); completedLevels.add(levelIndex); localStorage.setItem('completedLevels', JSON.stringify([...completedLevels])); stopTimer(); playSound('level-complete'); } } render(); }));
   let coupletDragIndex = null;

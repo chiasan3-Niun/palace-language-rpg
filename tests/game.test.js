@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { createInitialState, applyDialogueChoice, applyAnswer, useHint } from '../src/game.js';
+import { createInitialState, applyDialogueChoice, applyAnswer, useHint, rewardPuzzle, addSuspicion } from '../src/game.js';
 
 const initial = createInitialState();
 assert.equal(initial.composure, 100);
@@ -33,5 +33,7 @@ assert.equal(eliminated.hints.eliminate, true);
 
 const insufficient = useHint(createInitialState(), 'eliminate');
 assert.equal(insufficient.hints.eliminate, false);
+assert.equal(rewardPuzzle(initial).talent, 5);
+assert.equal(addSuspicion(initial, 5).suspicion, 5);
 
 console.log('game state tests passed');

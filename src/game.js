@@ -42,3 +42,11 @@ export function useHint(state, hintType) {
     hints: { ...state.hints, [hintType]: true }
   };
 }
+
+export function rewardPuzzle(state) {
+  return { ...state, talent: Math.min(MAX_TALENT, state.talent + 5) };
+}
+
+export function addSuspicion(state, amount = 5) {
+  return { ...state, suspicion: Math.min(100, (state.suspicion || 0) + amount) };
+}
