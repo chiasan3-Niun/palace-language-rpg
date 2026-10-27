@@ -28,6 +28,9 @@ let timerId = null;
 let features = JSON.parse(localStorage.getItem('palace-features') || 'null') || createFeatures();
 let featurePanel = '';
 let selectedAnswer = null;
+let displayedQuestionId = null;
+let displayedOptions = [];
+let displayedAnswer = null;
 let feedback = '';
 let levelIndex = 0;
 let questionIndex = 0;
@@ -98,8 +101,16 @@ function dialogueView() {
 
 function questionView() {
   if (!['question', 'retry'].includes(phase)) return '';
-  const q = currentQuestion(); const options = state.hints.eliminate ? q.options.slice(0, -1) : q.options;
-  return `<section class="question-card"><div class="eyebrow">${level().knowledge}｜第 ${questionIndex + 1}／${questions().length} 題｜${q.type}｜專案自編・AI 初審完成</div><h2>用線索判斷</h2><p>${q.prompt}</p><div class="answer-list">${options.map((text, i) => `<button class="answer-button ${selectedAnswer === i ? 'selected' : ''}" data-answer="${i}">${text}</button>`).join('')}</div><div class="tools"><button class="tool-button" data-hint="semantic" ${state.hints.semantic ? 'disabled' : ''}>語意點醒</button><button class="tool-button" data-hint="eliminate" ${state.hints.eliminate || state.talent < 10 ? 'disabled' : ''}>排除陷阱（-10）</button><button class="tool-button" data-hint="micro" ${state.hints.micro || state.talent < 25 ? 'disabled' : ''}>微課錦囊（-25）</button><button class="tool-button" data-submit ${selectedAnswer === null ? 'disabled' : ''}>提交判斷</button></div>${renderFeedback(feedback, phase === 'success' ? 'good' : 'neutral')}</section>`;
+  const q = currentQuestion();
+  if (displayedQuestionId !== q.id) {
+    const shuffled = q.options.map((text, index) => ({ text, index })).sort(() => Math.random() - 0.5);
+    displayedOptions = shuffled;
+    displayedAnswer = shuffled.findIndex((item) => item.index === q.answer);
+    displayedQuestionId = q.id;
+  }
+  const removable = displayedOptions.find((item) => item.index !== q.answer);
+  const options = state.hints.eliminate ? displayedOptions.filter((item) => item !== removable) : displayedOptions;
+  return `<section class="question-card"><div class="eyebrow">${level().knowledge}｜第 ${questionIndex + 1}／${questions().length} 題｜${q.type}｜專案自編・AI 初審完成</div><h2>用線索判斷</h2><p>${q.prompt}</p><div class="answer-list">${options.map((item) => `<button class="answer-button ${selectedAnswer === item.index ? 'selected' : ''}" data-answer="${item.index}">${item.text}</button>`).join('')}</div><div class="tools"><button class="tool-button" data-hint="semantic" ${state.hints.semantic ? 'disabled' : ''}>語意點醒</button><button class="tool-button" data-hint="eliminate" ${state.hints.eliminate || state.talent < 10 ? 'disabled' : ''}>排除陷阱（-10）</button><button class="tool-button" data-hint="micro" ${state.hints.micro || state.talent < 25 ? 'disabled' : ''}>微課錦囊（-25）</button><button class="tool-button" data-submit ${selectedAnswer === null ? 'disabled' : ''}>提交判斷</button></div>${renderFeedback(feedback, phase === 'success' ? 'good' : 'neutral')}</section>`;
 }
 
 function finalBattleView() {
@@ -127,7 +138,7 @@ function render() {
   bind();
 }
 
-function reset() { state = { ...createInitialState(), ...runStats }; cutsceneStep = 0; clueOrder = puzzles[level().id]?.type === 'sequence' ? [...puzzles[level().id].parts] : []; puzzleSelection = ''; battleState = createBattleState(); coupletTiles = ['付微軀', '一曲離歌', '千秋青史']; questionIndex = 0; selectedAnswer = null; feedback = ''; render(); }
+function reset() { state = { ...createInitialState(), ...runStats }; cutsceneStep = 0; clueOrder = puzzles[level().id]?.type === 'sequence' ? [...puzzles[level().id].parts] : []; puzzleSelection = ''; battleState = createBattleState(); coupletTiles = ['付微軀', '一曲離歌', '千秋青史']; questionIndex = 0; displayedQuestionId = null; displayedOptions = []; displayedAnswer = null; selectedAnswer = null; feedback = ''; render(); }
 function bind() {
   app.querySelector('[data-audio-toggle]')?.addEventListener('click', () => { audioError = ''; audio.toggle(); render(); });
   app.querySelectorAll('[data-feature]').forEach((b) => b.addEventListener('click', () => { featurePanel = b.dataset.feature; render(); }));
@@ -150,7 +161,7 @@ function bind() {
   let coupletDragIndex = null;
   app.querySelectorAll('[data-couplet-tile]').forEach((tile) => { tile.addEventListener('dragstart', () => { coupletDragIndex = Number(tile.dataset.coupletTile); }); tile.addEventListener('dragover', (event) => event.preventDefault()); tile.addEventListener('drop', (event) => { event.preventDefault(); const target = Number(tile.dataset.coupletTile); if (coupletDragIndex === null || coupletDragIndex === target) return; const next = [...coupletTiles]; const [moved] = next.splice(coupletDragIndex, 1); next.splice(target, 0, moved); coupletTiles = next; render(); }); });
   app.querySelectorAll('[data-answer]').forEach((b) => b.addEventListener('click', () => { playSound('ui-click'); selectedAnswer = Number(b.dataset.answer); render(); }));
-  app.querySelector('[data-submit]')?.addEventListener('click', () => { const q = currentQuestion(); const ok = selectedAnswer === q.answer; if (ok) playSound('answer-correct'); else playSound('answer-wrong'); state = applyAnswer(state, ok); feedback = ok ? `答對，才情值 +10。${q.reason}` : q.reason; if (ok && questionIndex < questions().length - 1) { questionIndex += 1; phase = 'question'; state = { ...state, hints: { semantic: false, eliminate: false, micro: false } }; } else { phase = state.phase === 'failure' ? 'failure' : ok ? 'success' : 'retry'; if (phase === 'failure' && features.amulet > 0) { features = useAmulet(features); localStorage.setItem('palace-features', JSON.stringify(features)); phase = 'retry'; feedback = '太后懿旨護身符替你擋下一次失誤。'; } if (ok) { progression = completeLevel(progression, levelIndex, level().item); features = updateFeatures({ ...features, items: progression.items }, progression.completed.length, levelIndex); localStorage.setItem('palace-progression', JSON.stringify(progression)); localStorage.setItem('palace-features', JSON.stringify(features)); completedLevels.add(levelIndex); localStorage.setItem('completedLevels', JSON.stringify([...completedLevels])); stopTimer(); } if (phase === 'failure') playSound('level-failure'); if (phase === 'success') playSound('level-complete'); } selectedAnswer = null; render(); });
+  app.querySelector('[data-submit]')?.addEventListener('click', () => { const q = currentQuestion(); const ok = selectedAnswer === q.answer; if (ok) playSound('answer-correct'); else playSound('answer-wrong'); state = applyAnswer(state, ok); feedback = ok ? `答對，才情值 +10。${q.reason}` : q.reason; if (ok && questionIndex < questions().length - 1) { questionIndex += 1; displayedQuestionId = null; phase = 'question'; state = { ...state, hints: { semantic: false, eliminate: false, micro: false } }; } else { phase = state.phase === 'failure' ? 'failure' : ok ? 'success' : 'retry'; if (phase === 'failure' && features.amulet > 0) { features = useAmulet(features); localStorage.setItem('palace-features', JSON.stringify(features)); phase = 'retry'; feedback = '太后懿旨護身符替你擋下一次失誤。'; } if (ok) { progression = completeLevel(progression, levelIndex, level().item); features = updateFeatures({ ...features, items: progression.items }, progression.completed.length, levelIndex); localStorage.setItem('palace-progression', JSON.stringify(progression)); localStorage.setItem('palace-features', JSON.stringify(features)); completedLevels.add(levelIndex); localStorage.setItem('completedLevels', JSON.stringify([...completedLevels])); stopTimer(); } if (phase === 'failure') playSound('level-failure'); if (phase === 'success') playSound('level-complete'); } selectedAnswer = null; render(); });
   app.querySelectorAll('[data-hint]').forEach((b) => b.addEventListener('click', () => { playSound('ui-click'); state = useHint(state, b.dataset.hint); feedback = b.dataset.hint === 'semantic' ? '回到字形構件與題幹的關係。' : b.dataset.hint === 'micro' ? knowledgeCards[level().id].summary : '已排除一個錯誤選項。'; render(); }));
   app.querySelector('[data-restart]')?.addEventListener('click', () => { if (features.amulet > 0) { features = useAmulet(features); localStorage.setItem('palace-features', JSON.stringify(features)); } runStats = { ...runStats, composure: 100 }; localStorage.setItem('palace-run-stats', JSON.stringify(runStats)); audio.stopAll(); phase = 'puzzle'; playLevelBgm(); reset(); startTimer(); });
   app.querySelector('[data-map-back]')?.addEventListener('click', () => { audio.stopAll(); stopTimer(); phase = 'map'; render(); });
