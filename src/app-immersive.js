@@ -118,6 +118,7 @@ function resultView() {
 }
 
 function render() {
+  progression = { ...progression, suspicion: Math.max(progression.suspicion, state.suspicion || 0) };
   if (phase === 'map') { app.innerHTML = mapView(); }
   else { state = { ...state, suspicion: Math.max(progression.suspicion, state.suspicion || 0) }; const rank = getRank(progression.completed.length); const character = levelIndex === 0 ? (rank.index >= 2 ? '../public/images/characters/CH_PROTAGONIST_01_relieved.png' : '../public/images/characters/CH_PROTAGONIST_01_neutral.png') : level().character; app.innerHTML = `${audioControls()}<header class="topbar"><div><div class="eyebrow">第 ${levelIndex + 1}／12 關｜${level().subtitle}｜品階：${rank.name}</div><h1>${level().title}</h1><p class="objective">任務：${level().objective}</p></div>${renderStatus(state)}</header><section class="scene" aria-label="${level().title}場景"><img class="character" src="${character}" alt="${level().title}角色"><div class="clue-chip">劇情證物：${clueLabels[level().item]}｜背包 ${progression.items.length} 件</div></section>${phase === 'cutscene' ? cutsceneView() : ''}${phase === 'puzzle' ? puzzleView() : ''}${dialogueView()}${questionView()}${finalBattleView()}${resultView()}`; }
   bind();
