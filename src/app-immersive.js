@@ -123,7 +123,7 @@ function render() {
   bind();
 }
 
-function reset() { state = createInitialState(); cutsceneStep = 0; clueOrder = []; puzzleSelection = ''; battleState = createBattleState(); coupletTiles = ['付微軀', '一曲離歌', '千秋青史']; questionIndex = 0; selectedAnswer = null; feedback = ''; render(); }
+function reset() { state = createInitialState(); cutsceneStep = 0; clueOrder = puzzles[level().id]?.type === 'sequence' ? [...puzzles[level().id].parts] : []; puzzleSelection = ''; battleState = createBattleState(); coupletTiles = ['付微軀', '一曲離歌', '千秋青史']; questionIndex = 0; selectedAnswer = null; feedback = ''; render(); }
 function bind() {
   app.querySelector('[data-audio-toggle]')?.addEventListener('click', () => { audioError = ''; audio.toggle(); render(); });
   app.querySelectorAll('[data-feature]').forEach((b) => b.addEventListener('click', () => { featurePanel = b.dataset.feature; render(); }));
