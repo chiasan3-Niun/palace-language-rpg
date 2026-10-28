@@ -1,4 +1,5 @@
 import {terms} from './content.js';
+import termIPA from './term-ipa.json';
 let active=null;
 function stop(){if('speechSynthesis' in window)window.speechSynthesis.cancel();if(active){active.textContent='🔊 聽英文';active=null;}}
 function button(term){const b=document.createElement('button');b.type='button';b.className='pronounce';b.textContent='🔊 聽英文';b.setAttribute('aria-label',`朗讀 ${term.en}`);b.onclick=()=>{
@@ -16,7 +17,7 @@ function enhance(){
  const chapterNames=['發音與辨音','音位與同位音','區辨特徵','底層與表層','音韻運作','規則與順序','自然性與優選理論','規則與限制分析','借詞與音節','重音與音步','構詞音韻'];
  const chapter=chapterNames.indexOf(title)+1;
  const position=Number(flip.previousElementSibling?.textContent.match(/^\d+/)?.[0])-1;
- const term=terms.filter(t=>t.chapter===chapter)[position];if(term)flip.after(button(term));
+ const term=terms.filter(t=>t.chapter===chapter)[position];if(term){flip.after(button(term));const p=document.createElement('p');p.className='ipa';p.textContent=`美式逐詞參考 /${termIPA[term.en]}/`;flip.after(p);}
  }
 }
 const observer=new MutationObserver(()=>{if(active&&!active.isConnected)stop();enhance();});

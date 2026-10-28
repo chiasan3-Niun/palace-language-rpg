@@ -1,5 +1,6 @@
 import * as T from 'three';
 import {createNocturnal} from './nocturnal.js';
+import {bridgeRoute} from './bridge-walk.js';
 export function addLife(scene,islands){
  const mat=c=>new T.MeshStandardMaterial({color:c,roughness:.9,flatShading:true});
  const white=mat('#eee8d8'),black=mat('#373831'),pink=mat('#ddaaa5'),wood=mat('#b5a17a');
@@ -15,7 +16,7 @@ export function addLife(scene,islands){
    const limbs=human.children.filter(c=>c.geometry?.type==='BoxGeometry'&&c.position.y<.5&&c.position.x!==0).map(c=>{
     const pivot=new T.Group();pivot.position.copy(c.position);pivot.position.y+=.12;human.remove(c);c.position.set(0,-.12,0);pivot.add(c);human.add(pivot);return {pivot,side:Math.sign(pivot.position.x),arm:pivot.position.y>.4};
    });
-   animated.push({object:human,origin:human.position.clone(),phase:j+i,type:'person',limbs,lane:j%4,offset:j*.73+i*.19});
+   animated.push({object:human,origin:human.position.clone(),phase:j+i,type:'person',limbs,lane:j%4,offset:j*.73+i*.19,route:i<11&&j<2?bridgeRoute(i,j):null,island});
   });
   // 每島一隻小動物：兔、豬、羊交替。
   const pet=new T.Group();pet.position.set(-2.2,.16,-.4);island.add(pet);const kind=i%3;
@@ -51,6 +52,7 @@ export function addLife(scene,islands){
    a.object.position.set(x,a.origin.y+bounce*.09,1.5+a.lane*.32);
    a.object.scale.set(1-bounce*.035,1+bounce*.07,1-bounce*.035);
    a.object.rotation.y=forward?Math.PI/2:-Math.PI/2;
+   if(a.route){const step=a.route(elapsed);a.object.position.copy(step.position).sub(new T.Vector3(a.island.position.x,0,a.island.position.z));a.object.position.y+=bounce*.025;a.object.rotation.y=step.heading;}
    a.limbs.forEach(l=>l.pivot.rotation.x=walking?Math.sin(elapsed*7+a.phase)*.55*l.side*(l.arm?-1:1):0);
   });
  },setNight(value){lamps.forEach(m=>m.emissiveIntensity=value?1.8:0);nocturnal.setNight(value);}};

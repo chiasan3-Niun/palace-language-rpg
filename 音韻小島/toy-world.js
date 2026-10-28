@@ -18,7 +18,8 @@ export function dressWorld({scene,islands,meshes,camera,controls,open}){
   // 小型校舍：窗格、分層腰線與門廊。
   const building=new T.Group();building.position.set(-.5,.15,-1.25);g.add(building);
   add(building,new T.BoxGeometry(2.5,1.65,1.15),cream,0,.85,0);
-  const roof=add(building,new T.ConeGeometry(1.9,.6,4),mat(['#aa6550','#8c80b1','#709ba4','#c99160'][i%4]),0,1.95,0);roof.rotation.y=Math.PI/4;roof.scale.z=.7;
+  const roofGeometry=new T.ConeGeometry(1,.6,4);roofGeometry.rotateY(Math.PI/4);roofGeometry.scale(2.9/Math.SQRT2,1,1.55/Math.SQRT2);
+  const roof=add(building,roofGeometry,mat(['#aa6550','#8c80b1','#709ba4','#c99160'][i%4]),0,1.95,0);
   for(let row=0;row<2;row++)for(let col=0;col<5;col++)add(building,new T.BoxGeometry(.28,.3,.03),mat('#c9b773'),-.95+col*.47,.45+row*.7,.59);
   add(building,new T.BoxGeometry(2.6,.08,1.2),mat('#c6a989'),0,.85,0);
   for(let j=0;j<8;j++){

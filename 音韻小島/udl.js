@@ -1,8 +1,9 @@
+import termIPA from './term-ipa.json';
 const $=s=>document.querySelector(s);
 const toolbar=document.createElement('section');toolbar.className='udl-tools';toolbar.innerHTML=`<h2>選擇適合你的學習方式</h2><p>目標：讀懂英文術語，用自己的話解釋，並以例子說明。閱讀、聆聽、文字與口說可以自由搭配。</p><label>今天的目標 <select id="udl-goal"><option value="3">理解 3 個術語</option><option value="5">理解 5 個術語</option><option value="10">理解 10 個術語</option></select></label> <button id="udl-large">放大文字</button> <button id="udl-contrast">高對比</button> <button id="udl-reading">專注閱讀</button><p class="source">設計依據：<a href="https://udlguidelines.cast.org/" target="_blank" rel="noopener">CAST UDL Guidelines</a>。選擇方式不影響評量標準：名詞正確、意思清楚、例子相關。</p>`;document.querySelector('nav').after(toolbar);
 $('#udl-goal').value=localStorage.getItem('udl-goal')||'3';$('#udl-goal').onchange=e=>localStorage.setItem('udl-goal',e.target.value);
 $('#udl-large').onclick=()=>document.body.classList.toggle('large-text');$('#udl-contrast').onclick=()=>document.body.classList.toggle('high-contrast');$('#udl-reading').onclick=()=>{const reading=document.body.classList.toggle('reading-only');$('#udl-reading').textContent=reading?'返回 3D 群島':'專注閱讀';};
-const ipa={Phonetics:['英式 /fəˈnetɪks/','https://assets.cambridge.org/97810091/86629/excerpt/9781009186629_excerpt.pdf'],Phonology:['英式 /fəˈnɒlədʒi/','https://assets.cambridge.org/97810091/86629/excerpt/9781009186629_excerpt.pdf'],Allophone:['英式 /ˈæləfəʊn/','https://www.oxfordlearnersdictionaries.com/definition/english/allophone_2']};
+const ipa=Object.fromEntries(Object.entries(termIPA).map(([en,reading])=>[en,[`${en==='Rendaku'?'日語借用術語':'美式逐詞參考'} /${reading}/（CMU 詞典轉寫；專門詞另作教學編寫，非全部詞典認證）`,'https://github.com/cmusphinx/cmudict']]));
 let recorder=null,stream=null,url=null;
 function addOptions(){document.querySelectorAll('article.term').forEach(card=>{
  const heading=card.querySelector('h3 small');if(!heading||card.querySelector('.udl-expression'))return;

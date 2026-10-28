@@ -3,3 +3,4 @@ dist/
 .vercel/
 原始資料檔/
 source-pages.json
+cmudict.dict
