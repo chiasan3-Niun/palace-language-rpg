@@ -1,0 +1,173 @@
+1	1	語音學	Phonetics	研究語音如何產生、傳遞與被聽辨。
+1	1	音韻學	Phonology	研究語言如何組織語音，以及語音的分布與變化規律。
+1	1	聲道	Vocal tract	氣流通過、形塑語音共鳴與阻塞的發音通道。
+1	1	咽腔	Pharynx	口腔後方通向喉部的空間。
+1	1	鼻腔	Nasal cavity	氣流與共鳴可經過的鼻部空間。
+1	1	國際音標	International Phonetic Alphabet; IPA	以音標記錄語音，避免把拼寫直接當成發音。
+1	1	附加符號	Diacritic	附在音標旁補充送氣、鼻化等細節的記號。
+1	1	寬式記音	Broad transcription	省略較細的語音差異，保留分析所需的主要區別。
+1	1	窄式記音	Narrow transcription	記錄較多實際發音細節的轉寫方式。
+1	2	元音圖	Vowel chart	以舌位高低、前後與圓唇等條件排列元音。
+1	2	高元音	High vowel	舌身相對抬高的元音，例如 [i,u]。
+1	2	前元音	Front vowel	舌身最高處相對偏前的元音。
+1	2	後元音	Back vowel	舌身最高處相對偏後的元音。
+1	2	央元音	Central vowel	舌位前後位置相對居中的元音。
+1	2	圓唇元音	Rounded vowel	發音時雙唇呈圓形的元音。
+1	2	展唇元音	Unrounded vowel	發音時雙唇沒有圓唇動作的元音。
+1	3	肺部外呼氣音	Pulmonic egressive sound	以肺部向外送出的氣流形成的語音。
+1	3	非肺部氣流音	Non-pulmonic sound	不單靠肺部外呼氣機制形成的語音。
+1	3	嘖音	Click	利用口腔內兩處閉鎖與舌部動作產生吸入氣流的音。
+1	3	內爆音	Implosive	以喉頭下降參與氣流機制的塞音。
+1	3	抬喉音	Ejective	以聲門閉鎖、喉頭上升形成氣流壓力的音。
+1	3	聲門	Glottis	兩條聲帶之間的開口。
+1	3	聲帶	Vocal folds	喉部可振動、參與發聲的組織。
+1	3	清音	Voiceless sound	發音時聲帶沒有週期性振動的音。
+1	3	濁音	Voiced sound	發音時伴隨聲帶週期性振動的音。
+1	3	清化	Devoicing	原本有聲的音在特定條件下失去或減少聲帶振動。
+1	3	濁音起始時間	Voice onset time; VOT	塞音釋放與聲帶開始振動之間的時間關係。
+1	4	成阻	Closure formation	發音器官形成阻塞的階段。
+1	4	持阻	Closure hold	發音器官維持阻塞的階段。
+1	4	除阻	Release	放開阻塞，讓氣流釋出的階段。
+1	4	濁流聲	Breathy voice	聲帶振動同時伴隨較多氣流的發聲類型。
+1	4	嘎裂聲	Creaky voice	聲帶振動較不規則、常帶低頻嘎裂感的發聲類型。
+1	4	音高	Pitch	人耳對聲音高低的感知，與基頻密切相關。
+1	4	基頻	Fundamental frequency; F0	聲帶振動所形成週期的基本頻率，常以 Hz 表示。
+1	4	喉塞音	Glottal stop	聲門閉鎖後釋放形成的塞音 [ʔ]。
+1	5	雙唇音	Bilabial	由雙唇形成阻塞或狹窄的音。
+1	5	唇齒音	Labiodental	由下唇與上齒形成狹窄的音。
+1	5	齒音	Dental	舌部與牙齒附近接觸或靠近的音。
+1	5	齒齦音	Alveolar	舌部在上齒後方齒齦處形成阻塞或狹窄的音。
+1	5	齒齦後音	Postalveolar	發音狹窄處位於齒齦後方的音。
+1	5	捲舌音	Retroflex	舌尖或舌冠後移等動作形成的一類音。
+1	5	硬顎音	Palatal	舌身前部向硬顎靠近形成的音。
+1	5	軟顎音	Velar	舌背向軟顎形成阻塞或狹窄的音。
+1	5	小舌音	Uvular	舌背在小舌附近形成阻塞或狹窄的音。
+1	5	咽音	Pharyngeal	在咽腔形成狹窄的音。
+1	5	發音方式	Manner of articulation	描述氣流如何受阻、通過或產生摩擦。
+1	5	阻塞音	Obstruent	氣流受到明顯阻礙的類別，包含塞音、擦音與塞擦音。
+1	5	響音	Sonorant	通常不以狹窄處的摩擦為主要音源，如鼻音與接近音。
+1	5	塞音	Stop; Plosive	先完全阻塞口腔氣流，再釋放的輔音。
+1	6	擦音	Fricative	氣流經過狹窄處而產生摩擦的輔音。
+1	6	塞擦音	Affricate	先完全阻塞，再以摩擦方式釋放的輔音。
+1	6	接近音	Approximant	發音器官靠近，但一般不形成明顯摩擦的音。
+1	6	流音	Liquid	常包含邊音及 r 類音的一組輔音。
+1	6	滑音	Glide	如 [j,w] 等非音節核心的元音樣音段。
+1	6	雙生輔音	Geminate	時長較長、在語言中可能具有區辨作用的輔音。
+1	6	次位發音	Secondary articulation	主要發音之外，同時出現較弱的附加發音動作。
+1	6	圓唇化	Labialization	發音時附帶圓唇動作，例如 [kʷ]。
+1	6	顎化	Palatalization	發音時舌身朝硬顎方向抬高，或音段轉向顎部發音。
+1	6	軟顎化	Velarization	發音時附帶舌背朝軟顎抬高的動作。
+1	6	咽腔化	Pharyngealization	發音時附帶咽腔狹窄的動作。
+1	7	雙重發音	Double articulation	同時有兩個主要阻塞部位，難以區分主次。
+2	1	音段	Segment	從連續語流分析出的個別語音單位。
+2	1	音素	Phone	具體實現的語音，通常用方括號表示。
+2	1	口誤	Speech error	說話時語音或其他語言單位產生非預期錯置。
+2	1	首音誤置	Spoonerism	詞語間起首語音互換等口誤現象。
+2	2	最小對比組	Minimal pair	只差一個音、其餘條件相同且詞義不同的一對詞。
+2	2	語音相似性	Phonetic similarity	聲音在發音或聲學性質上的相似程度。
+2	3	類比對比組	Near-minimal pair	使用相似而非完全相同的環境檢查音位對立。
+2	3	音韻對稱性	Phonological symmetry	音位系統在不同部位或特徵間呈現成組對應。
+2	5	蘊含關係	Implicational relationship	某類結構出現時，常伴隨另一類較基本結構的關係。
+2	5	音位庫	Phoneme inventory	一個語言所具有的音位集合。
+2	6	系統性空缺	Systematic gap	音系中未出現某種預期音段或組合的現象。
+3	1	特徵值	Feature value	某音段在指定特徵上的取值或規定狀態。
+3	1	單值特徵	Univalent feature	以特徵是否存在表示，不使用正負對立的分析。
+3	2	自然性條款	Naturalness Condition	教材提出特徵應能用語音性質界定的要求。
+3	3	大類特徵	Major-class feature	用於區分輔音、元音、響音等大類的特徵。
+3	3	聲門特徵	Laryngeal feature	描述聲帶與聲門狀態的特徵。
+3	4	連續性	Continuant	描述口腔氣流是否有完全中央阻塞的特徵。
+3	4	延遲釋放	Delayed release	描述塞擦音等阻塞後釋放較緩的性質。
+3	4	邊音性	Lateral	描述氣流由舌部側邊通過的性質。
+3	5	未賦值	Nonspecification	分析中不對某音段的某特徵指定值。
+3	7	唇部特徵	Labial	以唇部參與發音為基礎的部位特徵。
+3	7	舌冠特徵	Coronal	以舌尖或舌葉參與發音為基礎的部位特徵。
+3	7	舌背特徵	Dorsal	以舌背參與發音為基礎的部位特徵。
+3	7	冗贅特徵	Redundant feature	在指定系統中可由其他條件預測、不需獨立儲存的特徵。
+3	7	對比特徵	Contrastive feature	在指定語言系統中用來區分音位的特徵。
+3	8	未完全賦值理論	Underspecification theory	底層不儲存所有可預測特徵值的分析方式。
+4	1	語音表層	Surface representation; SR	音韻分析中經過運作後實際呈現的語音形式。
+4	2	同位音變異	Allophonic variation	同一音位依語音環境呈現不同音值。
+4	3	詞幹	Stem	可接受詞綴等構詞操作的基礎形式。
+4	3	命令式	Imperative	表達命令等功能的語法形式；教材利用加綴形式觀察音變。
+4	6	嗞噝音	Sibilant	具有明顯高頻噪音的一類擦音及塞擦音。
+5	1	變化對象	Focus	規則 A → B 中接受變化的音段或自然群組 A。
+5	1	結構變化	Structural change	規則中對變化結果 B 的描述。
+5	1	結構描述	Structural description	規則適用對象與左右環境合起來的條件。
+5	1	條件音變	Conditional change	只在指定語音環境中發生的音變。
+5	1	無條件音變	Unconditional change	不受特定鄰音環境限制的音變。
+5	1	其他律	Elsewhere Condition	在符合相關條件時，較特定規則優先於一般規則的原則。
+5	2	完全同化	Total assimilation	音段在相關特徵上變得與影響它的音相同。
+5	2	部分同化	Partial assimilation	只改變部分特徵，其他特徵仍保留的同化。
+5	2	α 記號	Alpha notation	以變數表達兩處特徵值必須相同等關係。
+5	3	部位同化	Place assimilation	音段的發音部位受到鄰音影響而改變。
+5	4	鼻化	Nasalization	音段增加鼻腔共鳴或鼻音特徵。
+5	4	聲性同化	Voicing assimilation	相鄰音段的清濁性質變得一致。
+5	5	異化	Dissimilation	某音在特定特徵上變得與附近另一音較不相似。
+5	5	連濁	Rendaku	日語複合詞後項起首音在特定條件下濁化的現象。
+5	6	刪除	Deletion	輸入中的某音段在輸出中不再實現。
+6	1	依序運作	Serial application	規則先後作用，後一步以先前結果為輸入。
+6	1	同時運作	Simultaneous application	多項規則直接檢查同一輸入的分析方式。
+6	2	內在順序	Intrinsic rule order	可由規則性質推知、不需另行約定的順序。
+6	3	外在順序	Extrinsic rule order	需由語言資料額外指定的規則先後關係。
+6	3	閃音化	Flapping	塞音等在特定環境實現為短暫舌尖拍擊音的變化。
+6	5	反饋給順序	Counterfeeding order	能創造環境的規則較晚作用，使先前規則錯過該環境。
+6	6	反截殺順序	Counterbleeding order	可能破壞環境的規則較晚作用，先前規則的效果仍保留。
+7	1	自然性	Naturalness	討論語音結構或歷程在發音、聽辨與跨語言分布上的傾向。
+7	1	有標性	Markedness	在指定理論中描述較受限制、較複雜等結構的概念。
+7	1	無標	Unmarked	相對基本、較少結構要求的類型；不代表每種語言都最常用。
+7	3	強化	Fortition; Strengthening	朝較強阻塞等方向變化的一類音變。
+7	3	弱化	Lenition; Weakening	朝較弱阻塞等方向變化的一類音變。
+7	3	響度	Sonority	音韻分析中音段相對顯著性或開放程度的階層，不能直接等同分貝。
+7	4	共時分析	Synchronic analysis	研究某一時期語言系統內的結構與規律。
+7	4	歷時分析	Diachronic analysis	研究語言隨時間的發展與變化。
+7	6	最大聽辨區別度	Maximum perceptual differentiation	在系統中讓對比更容易被聽辨的傾向。
+7	7	輸入值	Input	送入音韻計算或候選產生程序的形式。
+7	7	輸出值	Output	評估後實現的表層形式。
+7	7	衍生機制	Generator; GEN	依輸入產生可供評估的候選形式。
+7	7	評估機制	Evaluator; EVAL	根據限制位階比較候選形式的機制。
+7	7	候選形式	Candidate	供限制評估的可能輸出形式。
+7	7	最佳選項	Optimal candidate	在指定限制位階下勝出的候選形式。
+7	7	限制位階	Constraint ranking	決定衝突時哪個限制優先的排序。
+7	8	共謀	Conspiracy	不同音韻歷程共同達成同一輸出結構要求的現象。
+7	8	無韻尾限制	NO CODA	要求輸出音節不含輔音韻尾的有標限制。
+7	8	換位	Metathesis	音段相對次序發生改變。
+7	8	清濁共諧	Voicing agreement	教材要求同音節緊鄰阻塞音具有一致清濁的限制。
+9	2	音節	Syllable	由核心及可有的聲母、韻尾組成的音韻單位。
+9	3	韻母	Rime; Rhyme	音節核心與韻尾合起來的成分。
+9	3	音節劃分	Syllabification	將音段組織、分配到音節中的分析。
+9	3	成音節輔音	Syllabic consonant	能充當音節核心的輔音。
+9	4	輔音叢	Consonant cluster	同一結構位置或相鄰位置連續出現的多個輔音。
+9	4	響度原則	Sonority principle	音段在音節中常朝核心增加響度、離開核心降低響度的傾向。
+9	7	二語習得	Second-language acquisition	學習另一語言的歷程；教材觀察母語音系如何影響發音調整。
+10	1	重音	Stress	音節在韻律結構中相對突出的地位。
+10	1	音步中心	Foot head	音步中較強、承載重音的成分。
+10	1	音步補足	Foot complement	音步中相對較弱的成分。
+10	1	右重格	Iamb	較弱成分在前、較強成分在後的音步類型。
+10	2	退化音步	Degenerate foot	在相應分析中未達雙分要求的音步。
+10	3	音步雙分	FT BIN; Foot binarity	要求音步在音節或莫拉層次符合雙分。
+10	3	左緣對齊	ALIGN L	教材要求音步左緣與韻律詞左緣對齊的限制。
+10	3	右緣對齊	ALIGN R	教材要求音步右緣與韻律詞右緣對齊的限制。
+10	3	音節納入音步	PARSE σ	要求音節被組織進音步的限制。
+10	3	重音碰撞	*CLASH	禁止相鄰重音音節的限制。
+10	3	韻律詞	Prosodic word	音步等韻律成分所屬的詞層級單位。
+10	3	韻律階層	Prosodic hierarchy	音段、音節、音步、韻律詞等層次的組織關係。
+10	4	音節重量	Syllable weight	以韻母結構、莫拉等條件分析音節輕重。
+10	4	輕音節	Light syllable	依某語言計重規則，重量較輕、常為一莫拉的音節。
+10	4	重音節	Heavy syllable	依某語言計重規則，常具有至少兩莫拉的音節。
+10	4	超重音節	Superheavy syllable	在區分此類的語言中，比一般重音節更重的結構。
+10	4	重量有感	Quantity sensitivity	音節重量參與決定重音分派的系統性質。
+10	4	重量無感	Quantity insensitivity	重音分派不依音節重量決定的系統性質。
+10	5	莫拉左重格	Moraic trochee	以雙莫拉組織的左重音步，可由一重音節或兩輕音節構成。
+10	6	重量與重音原則	Weight-to-stress principle; WSP	連結重音節與重音地位的限制；教材以重音節不得處於弱分支說明。
+10	7	末節非步	Final extrametricality	教材拉丁語分析中，詞末音節不納入音步的要求。
+11	1	加綴	Affixation	在詞幹上附加詞綴的構詞操作。
+11	1	韻尾部位限制	CODA COND	教材要求韻尾輔音不得保有自身獨立部位的限制。
+11	1	特徵信實	IDENT-IO-F	要求輸入與輸出對應音段的特徵相同。
+11	1	輔音叢共諧	CC-AGR	教材要求相鄰輔音發音部位相同的限制。
+11	1	必有聲母	ONSET	要求音節具有聲母的有標限制。
+11	2	詞素邊界對齊	Morpheme alignment	要求詞素邊界與指定韻律邊界相對應。
+11	3	中綴	Infix	插入詞幹內部位置的詞綴。
+11	3	前綴	Prefix	附加在詞幹前面的詞綴。
+11	4	形態缺項	Morphological gap	某形態類別在特定詞幹上沒有相應實現形式。
+11	7	非線性音韻學	Nonlinear phonology	把音段與特徵等置於不同層次並以連結表示關係的分析。
+11	7	特徵幾何	Feature geometry	以階層節點及連結關係組織語音特徵的表示方式。

@@ -1,0 +1,1 @@
+const footer=document.createElement('footer');footer.style.cssText='padding:28px 20px;text-align:center;color:#564c3c;background:#eee6d7;border-top:1px solid #d3c4a8;line-height:1.8';footer.innerHTML='<strong>© Niun的族語教學多媒體應用 製作</strong><br><small>本站為階段性教學成果；教材引述與外部資料之權利歸原權利人所有。</small>';document.body.appendChild(footer);
