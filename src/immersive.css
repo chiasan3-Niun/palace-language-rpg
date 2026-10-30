@@ -1,4 +1,4 @@
-.immersive-shell { min-height: 100vh; padding: 28px; background: #140b09 center/cover fixed; animation: scene-in .7s ease both; }
+.immersive-shell { min-height: 100vh; padding: 28px; background: #140b09 center/cover fixed; }
 .map-screen { min-height: calc(100vh - 56px); padding: 28px; border: 1px solid #b88b47; background: linear-gradient(135deg, rgba(35,17,12,.72), rgba(35,17,12,.9)), url('../public/images/backgrounds/BG_01_SHENWUMEN.png') center/cover; }
 .map-title { max-width: 760px; margin: 0 auto 28px; text-align: center; }
 .map-title h1 { font-size: clamp(2rem, 5vw, 4rem); letter-spacing: .18em; }
@@ -11,7 +11,7 @@
 .cutscene-card { width: min(920px, 100%); padding: 34px; text-align: center; background: linear-gradient(180deg, rgba(52,25,19,.75), rgba(23,12,10,.95)); border: 1px solid #b88b47; animation: scene-in 1s ease both; }
 .cutscene-card img { width: min(620px, 100%); max-height: 46vh; object-fit: contain; margin: 12px auto; animation: float-in 1s ease both; }
 .cutscene-card p { color: #f1dcc0; font-size: 1.2rem; line-height: 1.9; }
-.immersive-shell .topbar, .immersive-shell .dialogue-card, .immersive-shell .question-card, .immersive-shell .result-card, .immersive-shell .lesson-card { animation: scene-in .5s ease both; }
+.immersive-shell .topbar, .immersive-shell .dialogue-card, .immersive-shell .question-card, .immersive-shell .result-card, .immersive-shell .lesson-card { animation: none; }
 .puzzle-card { width: min(980px, 100%); margin: 0 auto 16px; padding: 26px; background: rgba(39,20,16,.94); border: 1px solid #d6aa5b; }
 .clue-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 18px 0; }
 .clue-part { min-height: 130px; padding: 10px; color: #f8ecd4; background: rgba(92,44,31,.8); border: 1px solid #9d7443; }
