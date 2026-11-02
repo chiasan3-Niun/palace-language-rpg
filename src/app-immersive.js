@@ -27,6 +27,7 @@ let timerSeconds = 0;
 let timerId = null;
 let features = JSON.parse(localStorage.getItem('palace-features') || 'null') || createFeatures();
 let featurePanel = '';
+let galleryItem = null;
 let selectedAnswer = null;
 let displayedQuestionId = null;
 let displayedOptions = [];
@@ -49,6 +50,27 @@ const clueLabels = { ITEM_01_SCROLL:'秀女宗族名冊', ITEM_02_BOX:'深埋麝
 const achievementBadges = { 'six-books': 'UI_LEVEL_BADGE_01.svg', rhetoric: 'UI_LEVEL_BADGE_03.svg', couplet: 'UI_LEVEL_BADGE_12.svg', clear: 'UI_LEVEL_BADGE_12.svg' };
 const achievementNames = { 'six-books': '六書宗師', rhetoric: '修辭巧舌', couplet: '對聯魁首', clear: '十二關全通' };
 const allyImages = { '太醫盟': 'CH_TAIYI_PHYSICIAN_reassured.png', '太后派': 'CH_CHANGCHUN_DOWAGER_blessing.png', '文臣派': 'CH_WENHUA_SCHOLAR_approving.png' };
+const galleryStories = {
+  ITEM_01_SCROLL: { type: '物品', title: '秀女宗族名冊', image: '/public/images/items/ITEM_01_SCROLL.png', detail: '第一關取得的宗族名冊。', story: '名冊不只是姓名清單，也反映宮廷如何用文字整理身分、親屬與責任。讀名冊時，先看格式與欄位，再判斷內容是否可信。' },
+  ITEM_02_BOX: { type: '物品', title: '深埋麝香金盒', image: '/public/images/items/ITEM_02_BOX.png', detail: '第二關取得的香盒。', story: '宮廷香料常同時具有日常、醫療與政治用途。同一件物品放在不同情境裡，意義可能完全不同，因此線索必須和文字記錄一起判讀。' },
+  ITEM_03_POETRY_CARD: { type: '物品', title: '倚梅園剪紙小像', image: '/public/images/items/ITEM_03_POETRY_CARD.png', detail: '第三關取得的詩文線索。', story: '剪紙與題詩常把圖像、文字和祝願放在一起。讀者不只看表面圖案，也要留意借代、象徵和語境。' },
+  ITEM_04_TOKEN: { type: '物品', title: '一丈紅行刑令牌', image: '/public/images/items/ITEM_04_TOKEN.png', detail: '第四關取得的令牌。', story: '令牌代表的是命令與權力的轉移。辨讀相關文字時，主語、動詞和受詞的位置，會直接影響誰下令、誰執行。' },
+  ITEM_05_PLAQUE: { type: '物品', title: '金漆千秋賀壽匾', image: '/public/images/items/ITEM_05_PLAQUE.png', detail: '第五關取得的賀壽匾。', story: '賀壽題辭要符合對象、場合與目的。華麗的字面之外，還要確認祝賀、哀輓或表彰等語意是否相合。' },
+  ITEM_06_LOOKUP_CARDS: { type: '物品', title: '太醫藥典索引卡', image: '/public/images/items/ITEM_06_LOOKUP_CARDS.png', detail: '第六關取得的索引卡。', story: '傳統字書常用部首與筆畫建立查找路徑。查字時先找到可辨識的構件，再逐步縮小範圍，是一種有順序的閱讀策略。' },
+  ITEM_07_SEIZED_LETTER: { type: '物品', title: '搜繳家書密信', image: '/public/images/items/ITEM_07_SEIZED_LETTER.png', detail: '第七關取得的家書。', story: '書信的稱謂、署名和身分關係都是重要證據。紙張新舊或墨色深淺只能提供線索，格式與語意的矛盾往往更能揭露問題。' },
+  ITEM_08_INVITATION_CARD: { type: '物品', title: '皇家祈福柬帖', image: '/public/images/items/ITEM_08_INVITATION_CARD.png', detail: '第八關取得的柬帖。', story: '柬帖重視資訊位置與禮貌格式。對象、時間、席設和敬辭缺一不可，形式本身就是對收件人的尊重。' },
+  ITEM_09_AGE_DIAL: { type: '物品', title: '生辰干支算籌盤', image: '/public/images/items/ITEM_09_AGE_DIAL.png', detail: '第九關取得的年齡輪盤。', story: '「志學、弱冠、知命」把人生階段濃縮成文化稱謂。理解這些詞時，要把字面、年齡和使用情境放在一起看。' },
+  ITEM_10_GANZHI_DIAL: { type: '物品', title: '古玉日晷干支盤', image: '/public/images/items/ITEM_10_GANZHI_DIAL.png', detail: '第十關取得的日晷。', story: '干支、時辰與節慶是不同的時間系統。先分清楚各自的單位與用途，才不會把曆法、一天的時段和節日混成一件事。' },
+  ITEM_11_ROYAL_CHRONICLE: { type: '物品', title: '文淵閣先帝起居注', image: '/public/images/items/ITEM_11_ROYAL_CHRONICLE.png', detail: '第十一關取得的史料。', story: '典籍分類不能只看書本厚薄或外觀，還要回到內容與編寫體例。分類的目的，是幫助讀者找到正確的閱讀方法。' },
+  ITEM_12_JADE_SEAL: { type: '物品', title: '傳國奉天玉璽', image: '/public/images/items/ITEM_12_JADE_SEAL.png', detail: '第十二關取得的玉璽。', story: '玉璽象徵權力，但真正能讓論證站得住腳的，仍是句法、語意與證據。遊戲最後留下的問題是：誰有權解釋文本？' },
+  'six-books': { type: '成就', title: '六書宗師', image: '/public/images/ui/UI_LEVEL_BADGE_01.svg', detail: '掌握文字構形與檢索方法。', story: '六書是傳統文字學用來觀察漢字構形與用法的分類觀念。它提醒我們，文字不是孤立的圖案，而是形、音、義互相連結的系統。' },
+  rhetoric: { type: '成就', title: '修辭巧舌', image: '/public/images/ui/UI_LEVEL_BADGE_03.svg', detail: '能從語境判斷修辭作用。', story: '修辭不是把句子裝飾得更華麗，而是讓語意更準確、更有力量。理解借代、對比或設問時，必須回到說話情境。' },
+  couplet: { type: '成就', title: '對聯魁首', image: '/public/images/ui/UI_LEVEL_BADGE_12.svg', detail: '完成對聯與文句判讀。', story: '對聯講究字數、結構、詞性與意義相對。排列字塊時，形式與內容要同時成立，才算真正讀懂。' },
+  clear: { type: '成就', title: '十二關全通', image: '/public/images/ui/UI_LEVEL_BADGE_12.svg', detail: '完成十二關宮廷語文考驗。', story: '這枚徽章代表你把線索、語文知識與判斷連成一條路，從看見證物走到重新取得解釋權。' },
+  '太醫盟': { type: '盟友', title: '太醫盟', image: '/public/images/characters/CH_TAIYI_PHYSICIAN_reassured.png', detail: '提供檢索與證據判讀支援。', story: '太醫院在宮廷中不只處理疾病，也累積大量記錄、藥典與分類知識。盟友的力量，來自能把零散資料整理成可查證的證據。' },
+  '太后派': { type: '盟友', title: '太后派', image: '/public/images/characters/CH_CHANGCHUN_DOWAGER_blessing.png', detail: '提供禮制與宮廷情境支援。', story: '宮廷禮制透過稱謂、場合與程序維持秩序。理解禮制不是只背規則，而是看出每個用語背後的關係。' },
+  '文臣派': { type: '盟友', title: '文臣派', image: '/public/images/characters/CH_WENHUA_SCHOLAR_approving.png', detail: '提供典籍與論證支援。', story: '文臣的工作包括整理典籍、撰寫文書與提出論證。文字判斷若沒有來源與理由，就很容易只剩下權威口吻。' }
+};
 
 function playSound(name, options) {
   audio.play(name, options);
@@ -70,10 +92,17 @@ function startTimer() { clearInterval(timerId); timerSeconds = timedLevels[level
 function stopTimer() { clearInterval(timerId); timerId = null; }
 
 function mapView() {
-  const achievementCards = features.achievements?.length ? `<div class="achievement-grid">${features.achievements.map((id) => `<article class="achievement-card"><img src="/public/images/ui/${achievementBadges[id]}" alt="${achievementNames[id] || id}"><strong>${achievementNames[id] || id}</strong></article>`).join('')}</div>` : '<p>尚未解鎖成就</p>';
-  const allyCards = features.allies?.length ? `<div class="ally-grid">${features.allies.map((ally) => `<article class="ally-card"><img src="/public/images/characters/${allyImages[ally]}" alt="${ally}"><strong>${ally}</strong></article>`).join('')}</div>` : '<p>尚未結盟</p>';
-  const panel = featurePanel === 'inventory' ? `<section class="feature-panel"><h2>語文秘寶背包</h2><p>護身符：${features.amulet} 次</p><div class="inventory-grid">${features.items?.length ? features.items.map((item) => `<article class="inventory-item"><img src="/public/images/items/${item}.png" alt="${clueLabels[item] || item}"><strong>${clueLabels[item] || item}</strong><small>${level().item === item ? level().objective : '已收集的關卡證物'}</small></article>`).join('') : '<p>尚未收集證物</p>'}</div><button data-close-feature>關閉</button></section>` : featurePanel === 'achievements' ? `<section class="feature-panel"><h2>成就與盟友</h2><p>徽章：${features.achievements.length}/${4}</p>${achievementCards}<p>盟友：${features.allies.length ? '' : '尚未結盟'}</p>${allyCards}<button data-close-feature>關閉</button></section>` : '';
-  return `${audioControls()}<section class="map-screen"><div class="map-title"><div class="eyebrow">紫禁深宮｜語文策</div><h1>宮城風雲圖</h1><p>沿著宮廷動線前進，收集證物，將語文知識變成破局的方法。</p><div class="map-tools"><button data-feature="inventory">查看背包</button><button data-feature="achievements">查看成就與盟友</button></div></div><div class="map-grid">${levels.map((item, i) => { const unlocked = i === 0 || completedLevels.has(i - 1); return `<button class="map-node" data-map="${i}" ${unlocked ? '' : 'disabled'}>第 ${String(i + 1).padStart(2, '0')} 關<br><strong>${item.title}</strong><small>${unlocked ? (completedLevels.has(i) ? '已完成｜可重玩' : '可進入') : '完成前一關後解鎖'}</small></button>`; }).join('')}</div>${panel}</section>`;
+  const achievementCards = features.achievements?.length ? `<div class="achievement-grid">${features.achievements.map((id) => `<article class="achievement-card"><button class="gallery-trigger" data-gallery-id="${id}" type="button"><img src="/public/images/ui/${achievementBadges[id]}" alt="${achievementNames[id] || id}"></button><strong>${achievementNames[id] || id}</strong></article>`).join('')}</div>` : '<p>尚未解鎖成就</p>';
+  const allyCards = features.allies?.length ? `<div class="ally-grid">${features.allies.map((ally) => `<article class="ally-card"><button class="gallery-trigger" data-gallery-id="${ally}" type="button"><img src="/public/images/characters/${allyImages[ally]}" alt="${ally}"></button><strong>${ally}</strong></article>`).join('')}</div>` : '<p>尚未結盟</p>';
+  const gallery = galleryItem ? galleryModalView() : '';
+  const panel = featurePanel === 'inventory' ? `<section class="feature-panel"><h2>語文秘寶背包</h2><p>護身符：${features.amulet} 次</p><div class="inventory-grid">${features.items?.length ? features.items.map((item) => `<article class="inventory-item"><button class="gallery-trigger" data-gallery-id="${item}" type="button"><img src="/public/images/items/${item}.png" alt="${clueLabels[item] || item}"></button><strong>${clueLabels[item] || item}</strong><small>${level().item === item ? level().objective : '已收集的關卡證物'}</small></article>`).join('') : '<p>尚未收集證物</p>'}</div><button data-close-feature>關閉</button></section>` : featurePanel === 'achievements' ? `<section class="feature-panel"><h2>成就與盟友</h2><p>徽章：${features.achievements.length}/${4}</p>${achievementCards}<p>盟友：${features.allies.length ? '' : '尚未結盟'}</p>${allyCards}<button data-close-feature>關閉</button></section>` : '';
+  return `${audioControls()}<section class="map-screen"><div class="map-title"><div class="eyebrow">紫禁深宮｜語文策</div><h1>宮城風雲圖</h1><p>沿著宮廷動線前進，收集證物，將語文知識變成破局的方法。</p><div class="map-tools"><button data-feature="inventory">查看背包</button><button data-feature="achievements">查看成就與盟友</button></div></div><div class="map-grid">${levels.map((item, i) => { const unlocked = i === 0 || completedLevels.has(i - 1); return `<button class="map-node" data-map="${i}" ${unlocked ? '' : 'disabled'}>第 ${String(i + 1).padStart(2, '0')} 關<br><strong>${item.title}</strong><small>${unlocked ? (completedLevels.has(i) ? '已完成｜可重玩' : '可進入') : '完成前一關後解鎖'}</small></button>`; }).join('')}</div>${panel}</section>${gallery}`;
+}
+
+function galleryModalView() {
+  const item = galleryStories[galleryItem];
+  if (!item) return '';
+  return `<div class="gallery-modal" data-gallery-backdrop role="dialog" aria-modal="true" aria-label="${item.title}"><article class="gallery-dialog"><button class="gallery-close" data-gallery-close type="button" aria-label="關閉">×</button><div class="eyebrow">${item.type}圖鑑</div><img class="gallery-image" src="${item.image}" alt="${item.title}"><h2>${item.title}</h2><p class="gallery-detail">${item.detail}</p><div class="gallery-story"><strong>文化小故事</strong><p>${item.story}</p></div></article></div>`;
 }
 
 function cutsceneView() {
@@ -152,6 +181,10 @@ function bind() {
   app.querySelector('[data-audio-toggle]')?.addEventListener('click', () => { audioError = ''; audio.toggle(); render(); });
   app.querySelectorAll('[data-feature]').forEach((b) => b.addEventListener('click', () => { featurePanel = b.dataset.feature; render(); }));
   app.querySelector('[data-close-feature]')?.addEventListener('click', () => { featurePanel = ''; render(); });
+  app.querySelectorAll('[data-gallery-id]').forEach((b) => b.addEventListener('click', () => { galleryItem = b.dataset.galleryId; render(); }));
+  app.querySelector('[data-gallery-close]')?.addEventListener('click', () => { galleryItem = null; render(); });
+  app.querySelector('[data-gallery-backdrop]')?.addEventListener('click', (event) => { if (event.target === event.currentTarget) { galleryItem = null; render(); } });
+  if (galleryItem) document.addEventListener('keydown', closeGalleryOnEscape, { once: true });
   app.querySelectorAll('[data-map]').forEach((b) => b.addEventListener('click', () => { audio.stopAll(); levelIndex = Number(b.dataset.map); playSound('map-enter'); playLevelBgm(); phase = 'cutscene'; reset(); }));
   app.querySelector('[data-cutscene-next]')?.addEventListener('click', () => { if (cutsceneStep === 0) playSound('level-enter'); if (cutsceneStep < 2) cutsceneStep += 1; else phase = 'puzzle'; render(); });
   app.querySelectorAll('[data-puzzle-option]').forEach((b) => b.addEventListener('click', () => { playSound('clue-click'); const puzzle = puzzles[level().id]; const value = b.dataset.puzzleOption; if (puzzle.type === 'sequence') { if (!clueOrder.includes(value)) clueOrder.push(value); } else puzzleSelection = value; render(); }));
@@ -181,6 +214,10 @@ function bind() {
   app.querySelectorAll('[data-hint]').forEach((b) => b.addEventListener('click', () => { playSound('ui-click'); state = useHint(state, b.dataset.hint); feedback = b.dataset.hint === 'semantic' ? '回到字形構件與題幹的關係。' : b.dataset.hint === 'micro' ? knowledgeCards[level().id].summary : '已排除一個錯誤選項。'; render(); }));
   app.querySelector('[data-restart]')?.addEventListener('click', () => { if (features.amulet > 0) { features = useAmulet(features); localStorage.setItem('palace-features', JSON.stringify(features)); } runStats = { ...runStats, composure: 100 }; localStorage.setItem('palace-run-stats', JSON.stringify(runStats)); audio.stopAll(); phase = 'puzzle'; playLevelBgm(); reset(); startTimer(); });
   app.querySelector('[data-map-back]')?.addEventListener('click', () => { audio.stopAll(); stopTimer(); phase = 'map'; render(); });
+}
+
+function closeGalleryOnEscape(event) {
+  if (event.key === 'Escape' && galleryItem) { galleryItem = null; render(); }
 }
 
 app.className = 'immersive-shell';
