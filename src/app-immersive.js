@@ -46,6 +46,9 @@ const level = () => levels[levelIndex];
 const questions = () => questionBank[levelIndex].questions;
 const currentQuestion = () => questions()[questionIndex];
 const clueLabels = { ITEM_01_SCROLL:'秀女宗族名冊', ITEM_02_BOX:'深埋麝香金盒', ITEM_03_POETRY_CARD:'倚梅園剪紙小像', ITEM_04_TOKEN:'一丈紅行刑令牌', ITEM_05_PLAQUE:'金漆千秋賀壽匾', ITEM_06_LOOKUP_CARDS:'太醫藥典索引卡', ITEM_07_SEIZED_LETTER:'搜繳家書密信', ITEM_08_INVITATION_CARD:'皇家祈福柬帖', ITEM_09_AGE_DIAL:'生辰干支算籌盤', ITEM_10_GANZHI_DIAL:'古玉日晷干支盤', ITEM_11_ROYAL_CHRONICLE:'文淵閣先帝起居注', ITEM_12_JADE_SEAL:'傳國奉天玉璽' };
+const achievementBadges = { 'six-books': 'UI_LEVEL_BADGE_01.svg', rhetoric: 'UI_LEVEL_BADGE_03.svg', couplet: 'UI_LEVEL_BADGE_12.svg', clear: 'UI_LEVEL_BADGE_12.svg' };
+const achievementNames = { 'six-books': '六書宗師', rhetoric: '修辭巧舌', couplet: '對聯魁首', clear: '十二關全通' };
+const allyImages = { '太醫盟': 'CH_TAIYI_PHYSICIAN_reassured.png', '太后派': 'CH_CHANGCHUN_DOWAGER_blessing.png', '文臣派': 'CH_WENHUA_SCHOLAR_approving.png' };
 
 function playSound(name, options) {
   audio.play(name, options);
@@ -67,7 +70,9 @@ function startTimer() { clearInterval(timerId); timerSeconds = timedLevels[level
 function stopTimer() { clearInterval(timerId); timerId = null; }
 
 function mapView() {
-  const panel = featurePanel === 'inventory' ? `<section class="feature-panel"><h2>語文秘寶背包</h2><p>護身符：${features.amulet} 次</p><div class="inventory-grid">${features.items?.length ? features.items.map((item) => `<article class="inventory-item"><img src="/public/images/items/${item}.png" alt="${clueLabels[item] || item}"><strong>${clueLabels[item] || item}</strong><small>${level().item === item ? level().objective : '已收集的關卡證物'}</small></article>`).join('') : '<p>尚未收集證物</p>'}</div><button data-close-feature>關閉</button></section>` : featurePanel === 'achievements' ? `<section class="feature-panel"><h2>成就與盟友</h2><p>徽章：${features.achievements.length}/${4}</p><p>${features.achievements.join('、') || '尚未解鎖'}</p><p>盟友：${features.allies.join('、') || '尚未結盟'}</p><button data-close-feature>關閉</button></section>` : '';
+  const achievementCards = features.achievements?.length ? `<div class="achievement-grid">${features.achievements.map((id) => `<article class="achievement-card"><img src="/public/images/ui/${achievementBadges[id]}" alt="${achievementNames[id] || id}"><strong>${achievementNames[id] || id}</strong></article>`).join('')}</div>` : '<p>尚未解鎖成就</p>';
+  const allyCards = features.allies?.length ? `<div class="ally-grid">${features.allies.map((ally) => `<article class="ally-card"><img src="/public/images/characters/${allyImages[ally]}" alt="${ally}"><strong>${ally}</strong></article>`).join('')}</div>` : '<p>尚未結盟</p>';
+  const panel = featurePanel === 'inventory' ? `<section class="feature-panel"><h2>語文秘寶背包</h2><p>護身符：${features.amulet} 次</p><div class="inventory-grid">${features.items?.length ? features.items.map((item) => `<article class="inventory-item"><img src="/public/images/items/${item}.png" alt="${clueLabels[item] || item}"><strong>${clueLabels[item] || item}</strong><small>${level().item === item ? level().objective : '已收集的關卡證物'}</small></article>`).join('') : '<p>尚未收集證物</p>'}</div><button data-close-feature>關閉</button></section>` : featurePanel === 'achievements' ? `<section class="feature-panel"><h2>成就與盟友</h2><p>徽章：${features.achievements.length}/${4}</p>${achievementCards}<p>盟友：${features.allies.length ? '' : '尚未結盟'}</p>${allyCards}<button data-close-feature>關閉</button></section>` : '';
   return `${audioControls()}<section class="map-screen"><div class="map-title"><div class="eyebrow">紫禁深宮｜語文策</div><h1>宮城風雲圖</h1><p>沿著宮廷動線前進，收集證物，將語文知識變成破局的方法。</p><div class="map-tools"><button data-feature="inventory">查看背包</button><button data-feature="achievements">查看成就與盟友</button></div></div><div class="map-grid">${levels.map((item, i) => { const unlocked = i === 0 || completedLevels.has(i - 1); return `<button class="map-node" data-map="${i}" ${unlocked ? '' : 'disabled'}>第 ${String(i + 1).padStart(2, '0')} 關<br><strong>${item.title}</strong><small>${unlocked ? (completedLevels.has(i) ? '已完成｜可重玩' : '可進入') : '完成前一關後解鎖'}</small></button>`; }).join('')}</div>${panel}</section>`;
 }
 
