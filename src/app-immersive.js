@@ -150,7 +150,14 @@ function bind() {
   app.querySelectorAll('[data-map]').forEach((b) => b.addEventListener('click', () => { audio.stopAll(); levelIndex = Number(b.dataset.map); playSound('map-enter'); playLevelBgm(); phase = 'cutscene'; reset(); }));
   app.querySelector('[data-cutscene-next]')?.addEventListener('click', () => { if (cutsceneStep === 0) playSound('level-enter'); if (cutsceneStep < 2) cutsceneStep += 1; else phase = 'puzzle'; render(); });
   app.querySelectorAll('[data-puzzle-option]').forEach((b) => b.addEventListener('click', () => { playSound('clue-click'); const puzzle = puzzles[level().id]; const value = b.dataset.puzzleOption; if (puzzle.type === 'sequence') { if (!clueOrder.includes(value)) clueOrder.push(value); } else puzzleSelection = value; render(); }));
-  app.querySelectorAll('[data-dial]').forEach((dial) => dial.addEventListener('input', () => { puzzleSelection = dial.value === '0' ? (puzzles[level().id].type === 'age' ? '志學→弱冠→知命' : '干支／時辰／節慶') : dial.value; render(); }));
+  app.querySelectorAll('[data-dial]').forEach((dial) => dial.addEventListener('input', () => {
+    const puzzle = puzzles[level().id];
+    const values = puzzle.type === 'age'
+      ? ['志學→弱冠→知命', '弱冠→知命→志學', '知命→志學→弱冠']
+      : ['干支／時辰／節慶', '干支＝節慶', '節慶＝書信格式'];
+    puzzleSelection = values[Number(dial.value)];
+    render();
+  }));
   app.querySelectorAll('[data-classification-target]').forEach((target) => { target.addEventListener('dragover', (event) => event.preventDefault()); target.addEventListener('drop', (event) => { event.preventDefault(); const value = event.dataTransfer?.getData('text/plain'); if (value) { puzzleSelection = value; render(); } }); });
   app.querySelectorAll('[data-puzzle-option][draggable="true"]').forEach((b) => b.addEventListener('dragstart', (event) => event.dataTransfer?.setData('text/plain', b.dataset.puzzleOption)));
   app.querySelectorAll('[data-puzzle-option][draggable="true"]').forEach((b) => {
