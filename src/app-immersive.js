@@ -150,7 +150,7 @@ function bind() {
   app.querySelectorAll('[data-map]').forEach((b) => b.addEventListener('click', () => { audio.stopAll(); levelIndex = Number(b.dataset.map); playSound('map-enter'); playLevelBgm(); phase = 'cutscene'; reset(); }));
   app.querySelector('[data-cutscene-next]')?.addEventListener('click', () => { if (cutsceneStep === 0) playSound('level-enter'); if (cutsceneStep < 2) cutsceneStep += 1; else phase = 'puzzle'; render(); });
   app.querySelectorAll('[data-puzzle-option]').forEach((b) => b.addEventListener('click', () => { playSound('clue-click'); const puzzle = puzzles[level().id]; const value = b.dataset.puzzleOption; if (puzzle.type === 'sequence') { if (!clueOrder.includes(value)) clueOrder.push(value); } else puzzleSelection = value; render(); }));
-  app.querySelectorAll('[data-dial]').forEach((dial) => dial.addEventListener('input', () => {
+  app.querySelectorAll('[data-dial]').forEach((dial) => dial.addEventListener('change', () => {
     const puzzle = puzzles[level().id];
     const values = puzzle.type === 'age'
       ? ['志學→弱冠→知命', '弱冠→知命→志學', '知命→志學→弱冠']
